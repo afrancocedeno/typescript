@@ -1,0 +1,36 @@
+{
+  "name": "01-search_countries",
+  "version": "1.0.0",
+  "description": "function search with filters from a given url data of countries",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node-dev ./index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afrancocedeno/typescript-from_zero_to_hero.git"
+  },
+  "keywords": [
+    "typescript",
+    "node.js",
+    "express",
+    "axios"
+  ],
+  "author": "Alejandro Franco Cedeño",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afrancocedeno/typescript-from_zero_to_hero/issues"
+  },
+  "homepage": "https://github.com/afrancocedeno/typescript-from_zero_to_hero#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.3.3",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1"
+  }
+}
