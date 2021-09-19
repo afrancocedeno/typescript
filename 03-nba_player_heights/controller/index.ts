@@ -3,6 +3,7 @@ import axios from "axios";
 
 const url: string = "https://mach-eight.uc.r.appspot.com/";
 
+
 /**
  * getData - function that retrieves data from the url
  * @returns - array with the information of all nba players
