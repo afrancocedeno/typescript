@@ -63,6 +63,7 @@ const search = async (params: ISearch): Promise<any[]> => {
 			})
 			countries = [...regions];
 		}
+
 		// sort
 		/* 		if (sort) {
 					const sortedCountries = countries.sort()
@@ -88,3 +89,4 @@ const excecuteTest = async () => {
 }
 
 excecuteTest();
+	
