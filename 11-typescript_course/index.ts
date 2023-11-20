@@ -81,3 +81,47 @@ console.log("second " + foox);
   type Sizes = 'S' | 'M' | 'L'
   let availableSize: Sizes
 })();
+
+/**
+ * @tutorial - null vs undefined
+ */
+(() => {
+  // right way to initialize in Ts
+  let myNullNumber: number | null = null
+  let myUndefinedNumber: number | undefined = undefined
+
+  /* function sayHello(name: string | null) {
+    let hello = 'Hi! '
+    if (name) {
+      return hello += name
+    }
+    return hello += 'nobody'
+  } */
+  function sayHello(name: string | null) {
+    let hello = 'Hi! '
+    // hello += name? name : 'nobody'
+    return hello += name || 'nobody'
+  }
+
+
+  console.log(sayHello('Alejo'));
+  // console.log(sayHello(null));
+})();
+
+/**
+ * @tutorial - return in functions
+ *
+ */
+(() => {
+const getTotalAssets = (assets: number[]): number => {
+  let total: number = 0
+  assets.forEach(e => total += e)
+  return total
+}
+const printUserAssets = (assets: number[]): void => {
+  const total = getTotalAssets(assets)
+  console.log('total is; ' + total);
+}
+
+  printUserAssets([100 ,2000, 5000])
+})();
