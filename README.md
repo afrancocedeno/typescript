@@ -1,6 +1,6 @@
-# typescript-from_zero_to_hero
+# typescript from zero to hero
 
-Why is typescript the best language oyu can learn
+Why is typescript the best language you can learn
 
 ```bash
 $ tsc --init
