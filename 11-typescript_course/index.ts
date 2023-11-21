@@ -17,6 +17,10 @@ let bar = undefined
 bar = 1
 bar = 'hello'
 
+
+/**
+ * @tutorial - casting in TS
+ */
 const foo = (bar as string).toLowerCase()
 console.log(foo);
 
@@ -113,15 +117,42 @@ console.log("second " + foox);
  *
  */
 (() => {
-const getTotalAssets = (assets: number[]): number => {
-  let total: number = 0
-  assets.forEach(e => total += e)
-  return total
-}
-const printUserAssets = (assets: number[]): void => {
-  const total = getTotalAssets(assets)
-  console.log('total is; ' + total);
+  const getTotalAssets = (assets: number[]): number => {
+    let total: number = 0
+    assets.forEach(e => total += e)
+    return total
+  }
+  const printUserAssets = (assets: number[]): void => {
+    const total = getTotalAssets(assets)
+    console.log('total is; ' + total);
+  }
+
+  printUserAssets([100, 2000, 5000])
+})();
+
+const rta = 1 + '1'
+console.log(rta);
+
+/* object type */
+type Investment = {
+  id: string
+  name: string
+  createdAt: Date
+  updatedAt: Date
+  initialAmmount: number
+  period: number
+  futureValue: number
 }
 
-  printUserAssets([100 ,2000, 5000])
-})();
+type User = {
+  id: string
+  name: string
+  lastname: string
+  role: "admin" | "user"
+  datebirth: Date
+  assets: Investment[]
+  visible: boolean
+  createdAt: Date
+  updatedAt: Date
+}
+
