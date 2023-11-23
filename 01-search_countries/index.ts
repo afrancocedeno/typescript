@@ -1,3 +1,5 @@
+/* condorlabs consume rest api with filters */
+
 import axios from "axios";
 import express, { Application, Request, Response } from "express";
 
@@ -30,6 +32,8 @@ interface ISearch {
 	region?: string;
 	sort?: Map<string, SortBy>;
 }
+
+// do the same params using rest params with spread operator ...
 
 const search = async (params: ISearch): Promise<any[]> => {
 
