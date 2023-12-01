@@ -1,5 +1,5 @@
 //@ts-check
-// console.log("Hello via Bun!");
+// // console.log("Hello via Bun!");
 
 /**
  * static code analisys
@@ -7,7 +7,7 @@
 
 
 (() => {
-  // console.log('self executed arrow function');
+  // // console.log('self executed arrow function');
 })()
 
 const hex = 0xfff
@@ -22,10 +22,10 @@ bar = 'hello';
  * @tutorial - casting in TS
  */
 // const foo = (bar as string).toLowerCase()
-// console.log(foo);
+// // console.log(foo);
 
 // const foox = <string>bar.toUpperCase()
-// console.log("second " + foox);
+// // console.log("second " + foox);
 
 
 /**
@@ -34,13 +34,13 @@ bar = 'hello';
 (() => {
   function validateUserId(uid: string | number | boolean) {
     if (typeof uid === "string") {
-      // console.log('is string');
+      // // console.log('is string');
 
     } else if (typeof uid === "number") {
       uid
-      // console.log('is number: ' + uid.toFixed(2));
+      // // console.log('is number: ' + uid.toFixed(2));
     } else {
-      // console.log('is boolean: ' + uid);
+      // // console.log('is boolean: ' + uid);
     }
   }
   let uid: string | number | boolean
@@ -58,13 +58,13 @@ bar = 'hello';
 
   function validateUserId(uid: UserId) {
     if (typeof uid === "string") {
-      // console.log('is string');
+      // // console.log('is string');
 
     } else if (typeof uid === "number") {
       uid
-      // console.log('is number: ' + uid.toFixed(2));
+      // // console.log('is number: ' + uid.toFixed(2));
     } else {
-      // console.log('is boolean: ' + uid);
+      // // console.log('is boolean: ' + uid);
     }
   }
   let uid: UserId
@@ -108,8 +108,8 @@ bar = 'hello';
   }
 
 
-  // console.log(sayHello('Alejo'));
-  // // console.log(sayHello(null));
+  // // console.log(sayHello('Alejo'));
+  // // // console.log(sayHello(null));
 })();
 
 /**
@@ -124,14 +124,14 @@ bar = 'hello';
   }
   const printUserAssets = (assets: number[]): void => {
     const total = getTotalAssets(assets)
-    // console.log('total is; ' + total);
+    // // console.log('total is; ' + total);
   }
 
   printUserAssets([100, 2000, 5000])
 })();
 
 const rta = 1 + '1'
-// console.log(rta);
+// // console.log(rta);
 
 /* object type */
 type Investment = {
@@ -170,7 +170,7 @@ users.push({
   updatedAt: new Date(),
 })
 
-// console.log(users);
+// // console.log(users);
 
 
 /**
@@ -203,7 +203,7 @@ const newUser: User1 = {
 
   // destrusturing tuples
   const [tValue1, tValue2] = fixedTuple
-  // console.log(tValue1);
+  // // console.log(tValue1);
   tValue1.toUpperCase()
   //
 })();
@@ -247,7 +247,7 @@ const newUser: User1 = {
 (() => {
   const endless = () => {
     while (true) {
-      // console.log('endless');
+      // // console.log('endless');
     }
   }
   const fail = (message: string) => {
@@ -258,7 +258,7 @@ const newUser: User1 = {
 
 // validate array type
 // Array.isArray(['hello']): boolean // returns true or false
-// console.log(Array.isArray(['hello']));
+// // console.log(Array.isArray(['hello']));
 
 /**
  * @tutorial - noulish coalescing for optional parameters
@@ -284,7 +284,7 @@ const newUser: User1 = {
     }
   }
 
-  // console.log(createProduct('ab12', 'balon', 0, false));
+  // // console.log(createProduct('ab12', 'balon', 0, false));
 
   type Product = {
     id: string,
@@ -305,7 +305,7 @@ const newUser: User1 = {
     }
   }
 
-  console.log(createProduct1('ab12', 'balonx', 5)); */
+  // console.log(createProduct1('ab12', 'balonx', 5)); */
 })();
 
 /**
@@ -324,7 +324,7 @@ const createProduct1 = (
     ammount,
   }
 }
-// console.log(createProduct1('ab12', 'balonx'));
+// // console.log(createProduct1('ab12', 'balonx'));
 
 /**
  * @tutorial - rest params
@@ -332,7 +332,7 @@ const createProduct1 = (
  */
 (() => {
   // in javascript
-  // const myFunc = (...args) => {console.log(args)}
+  // // const myFunc = (...args) => {console.log(args)}
   // myFunc(1)
 
   enum ROLE {
@@ -359,7 +359,7 @@ const createProduct1 = (
     expenseFlag = user.role === ROLE.customer ? 3 : expenseFlag
     return expenseFlag
   }
-  // console.log(checkUserRoleV1());
+  // // console.log(checkUserRoleV1());
 
   // know do the same with create a function for 5 types of cash movement
   enum EXPENSETYPE {
@@ -391,7 +391,7 @@ const createProduct1 = (
     expenseFlag = expense.type === EXPENSETYPE.shopping ? 6 : expenseFlag
     return expenseFlag
   }
-  console.log("checkExpenseType V1: " + checkExpenseTypeV1());
+  // console.log("checkExpenseType V1: " + checkExpenseTypeV1());
 
   const checkExpenseTypeV2 = (params: EXPENSETYPE[]): number => {
     let expenseFlag = 0
@@ -403,13 +403,179 @@ const createProduct1 = (
     expenseFlag = expense.type === EXPENSETYPE.shopping ? 6 : expenseFlag
     return expenseFlag
   }
-  console.log("checkExpenseType V2: " + checkExpenseTypeV2([EXPENSETYPE.donation, EXPENSETYPE.education, EXPENSETYPE.entertainment]));
+  // console.log("checkExpenseType V2: " + checkExpenseTypeV2([EXPENSETYPE.donation, EXPENSETYPE.education, EXPENSETYPE.entertainment]));
 
   const checkExpenseTypeV3 = (...params: EXPENSETYPE[]): boolean => {
-    return params.includes(expense.type)? true: false
+    return params.includes(expense.type) ? true : false
   }
   // the same for a functionality ondly for admins in the example of user role validation
-  console.log("checkExpenseType V3: " + checkExpenseTypeV3(
-    EXPENSETYPE.education,
-  ));
-})()
+  // console.log("checkExpenseType V3: " + checkExpenseTypeV3(EXPENSETYPE.education,));
+})();
+
+
+/**
+ * @tutorial - sobrecarga de funciones
+ * solo funciona con funciones con "function" ts no puede inferir en static code analysis the multiple choise type
+ * ejemplo de uso E.G. typeorm select
+*/
+(() => {
+  // challenge my way
+  // alejo -> [a, l, e, j, o] ∴ string -> string[]
+  // [a, l, e, j, o] -> alejo ∴ string[] -> string
+  const toArray = (param: string): string[] => {
+    return param.split('')
+  }
+  // console.log(toArray('alejo'));
+  const toString = (param: string[]): string => {
+    return param.join('')
+  }
+  // console.log(toString(['a', 'l', 'e', 'j', 'o']));
+
+  // function overloading 1 its about only expose type I/O
+  function parseInput(input: string): string[];
+  // function overloading 2
+  function parseInput(input: string[]): string;
+
+  function parseInput(input: number): boolean;
+
+  // function parseInput(input: string | string[]): string | string[] {
+  function parseInput(input: unknown): unknown {
+    if (Array.isArray(input)) {
+      return input.join('')
+
+      // never avoid second validation, or code can crash
+    } else if (typeof input === 'string') {
+      return input.split('')
+    } else if (typeof input === 'number') {
+      return true
+    }
+    return input
+
+  }
+  const arrToStr = parseInput(['a', 'l', 'e', 'j', 'o']);
+  // problem is to access properties of string returned
+  // console.log("arrToStr: ", arrToStr.toUpperCase());
+
+  const strToArr = parseInput('alejo');
+  // problem is to access properties of array returned
+  // console.log("strToArr: ", strToArr.reverse());
+
+  const numToBoo = parseInput(3);
+  // console.log("numToBoo: ", numToBoo);
+
+
+})();
+
+
+
+/**
+ * @tutorial - hello interfaces
+*/
+(() => {
+  enum InvestmentType {
+    realState = 'real_state',
+    fixedIncome = 'fixed_income',
+    speculation = 'speculation'
+  }
+
+  interface Investment {
+  }
+
+  /* object type */
+  interface IInvestment extends IBaseModel {
+    name: string
+    initialAmmount: number
+    investmentType: unknown
+    tags: string[]
+  }
+
+  interface IFixedIncome extends IInvestment {
+    rate: number
+    period: number
+    futureValue: number
+    investmentType: InvestmentType.fixedIncome
+  }
+
+  // inside a base.model.ts
+  // export interface IBaseModel {
+  interface IBaseModel {
+    readonly id: string
+    readonly createdAt: Date
+    updatedAt: Date
+  }
+})();
+
+/**
+ * @tutorial -  omit and pick partial y required type
+*/
+(() => {
+
+  interface ICategory extends Omit<BaseModel, 'createdAt' | 'updatedAt'> {
+    id: string
+    name: string
+  }
+
+  interface BaseModel {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+  }
+
+  interface IInvestment extends BaseModel {
+    description: string
+    ammount: number
+    category: ICategory
+  }
+
+  // type InvestmentDto = Omit<IInvestment, 'id' | 'createdAt' | 'updatedAt' | 'category'>
+  interface ICreateInvestmentDto extends Omit<IInvestment, 'id' | 'createdAt' | 'updatedAt' | 'category'> {
+    categoryId: string
+  }
+
+  const categories: ICategory[] = [
+    {
+      id: '9cd19d11-6715-42aa-b40a-4e3364776a2b',
+      name: 'fixed_rate'
+    }
+  ]
+
+  const investments: IInvestment[] = []
+
+  const createIntestment = (payload: ICreateInvestmentDto): IInvestment => {
+    let { categoryId, ...data } = payload
+    const category: ICategory = categories.find((item) => item.id === categoryId) || { name: '', id: '' }
+    const newInvestment: IInvestment = {
+      id: '28897474-b635-49f3-b49a-13c0f1e2a458',
+      // description: payload.description,
+      // ammount: payload.ammount,
+      ...data,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      category: category
+    }
+    investments.push(newInvestment)
+    return newInvestment
+  }
+  const updateInvestment = (id: string, payload: IUpdateInvestmentDto) => {
+    const updatedInvestments = investments.map(item => {
+        return (item.id === id)? {...item, ...payload}: item
+    })
+    return updatedInvestments
+  }
+
+  const newInvestment: ICreateInvestmentDto = {
+    description: 'click yellow',
+    ammount: 2000000,
+    categoryId: '9cd19d11-6715-42aa-b40a-4e3364776a2b'
+  }
+
+  console.log(createIntestment(newInvestment))
+
+  // type IUpdateInvestmentDto = Partial<ICreateInvestmentDto>
+  interface IUpdateInvestmentDto extends Partial<ICreateInvestmentDto> { }
+
+  const payload: IUpdateInvestmentDto = {
+    ammount: 3000000
+  }
+  console.log(updateInvestment('28897474-b635-49f3-b49a-13c0f1e2a458', payload))
+})();
