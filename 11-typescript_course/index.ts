@@ -558,7 +558,7 @@ const createProduct1 = (
   }
   const updateInvestment = (id: string, payload: IUpdateInvestmentDto) => {
     const updatedInvestments = investments.map(item => {
-        return (item.id === id)? {...item, ...payload}: item
+      return (item.id === id) ? { ...item, ...payload } : item
     })
     return updatedInvestments
   }
@@ -578,4 +578,61 @@ const createProduct1 = (
     ammount: 3000000
   }
   console.log(updateInvestment('28897474-b635-49f3-b49a-13c0f1e2a458', payload))
+
+  // in the case of a complex find we just want to read only with all parameters with out modifications
+  interface IFindInvestmentDto extends Readonly<Partial<Investment>> {
+
+  }
+
 })();
+
+/**
+ * type by given index
+ */
+(() => {
+  interface IInitialVariable {
+    property: string
+  }
+  // const newVariable: IInitialVariable['property'] = 5    // ERROR
+  const newVariable: IInitialVariable['property'] = ''
+  console.log(typeof newVariable === 'string');
+})();
+
+
+/**
+ * prevent original array mutation
+ */
+(() => {
+  // const numbers = [1, 1, 3, 45, 6, 7]
+  const numbers: ReadonlyArray<number> = [1, 1, 3, 45, 6, 7]
+  numbers.pop()
+  numbers.push()
+  numbers.filter(() => { })
+  numbers.reduce(() => 0)
+  numbers.map(() => { })
+  numbers.unshift(1, 2)
+  // avoid make mutation methods like pop or push
+
+  interface Item {
+    tags: string[]
+  }
+
+  interface IFindItemDto extends Readonly<Partial<Omit<Item, 'tags'>>> {
+    readonly tags: ReadonlyArray<string>
+  }
+
+  const originalItem: Item = {
+    tags: ['black', 'white']
+  }
+
+  originalItem.tags.push() // available
+
+  const foundItem: IFindItemDto = {
+    tags: ['black', 'white']
+  }
+  foundItem.tags.push() // error
+
+  // but allow to reasign unles readonly tags: ...
+  foundItem.tags = ['yellow']
+
+})()
