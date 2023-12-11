@@ -75,25 +75,37 @@ investment.ammount = 3000000
  */
 class MyDate {
 
-    /**var declaration */
-    year: number // public year: number inferido to avoid verbose
-    private month: number
-    readonly day: number
+    /**var declaration and initialization **manuially */
+    /*     year: number // public year: number inferido to avoid verbose
+        private month: number
+        readonly day: number
+    
+        constructor(year: number, month: number, day: number) {
+            this.year = year
+            this.month = month
+            this.day = day
+        } */
 
-    constructor(year: number, month: number, day: number) {
-        this.year = year
-        this.month = month
-        this.day = day
+    /**regafactored better */
+    constructor(
+        public year: number = 2023,
+        private _month: number = 12, // private to test getter
+        public day: number = 11
+    ) {
+        /* if (this._month < 1) {
+            throw new Error('only integer')
+        } */
+
     }
     // not need to expose
     // addPadding(value: number) {  // or public
     private addPadding(value: number) {
-        return value < 10 ?  `0${value}`: `${value}`
+        return value < 10 ? `0${value}` : `${value}`
     }
 
     printFormat(): string {
         const day = this.addPadding(this.day)
-        const month = this.addPadding(this.month)
+        const month = this.addPadding(this._month)
         // return `${day}.${month}.${year}` // error
         return `${day}.${month}.${this.year}`
     }
@@ -102,18 +114,68 @@ class MyDate {
         if (type === 'years') {
             this.year += item
         } else if (type === 'months') {
-            this.month += item
+            this._month += item
         } else if (type === 'days') {
             this.day += item
         }
     }
+
+    getDay() { }
+
+    /**
+     * @description - get month  is a getter
+     * month is private in the constructor
+     */
+    // getMonth() {}
+    get month() {
+        return this._month
+    }
+
+    set month(value: number) {
+        // EDGE CASES
+        if (value && value > 0 && value <= 12) {
+            this._month = value
+        } else {
+            throw new Error('month not valid')
+        }
+    }
+    
+    /**
+     * @description - this is a property or attribute or method
+     */
+    // isLeapYear(): boolean {
+    get isLeapYear(): boolean {
+        if (this.year % 400 === 0) return true;
+        if (this.year % 100 === 0) return false;
+        return this.year % 4 === 0;
+    }
 }
+
 
 const date = new MyDate(1995, 1, 31)
 console.log(date.printFormat())
-date.add(1, 'years')
+date.add(0, 'years')
 console.log(date.printFormat())
 
-// from outside class scope I modify a public statement
-date.month = 12
+
 console.log(date.printFormat())
+console.log('is leap year: ' + date.isLeapYear);
+
+date.add(1, 'years')
+console.log(date.printFormat())
+// date.isLeapYear()
+console.log('is leap year: ' + date.isLeapYear);
+
+date.year = 2004
+
+// from outside class scope I modify a public statement
+
+console.log(date.printFormat())
+console.log('is leap year: ' + date.isLeapYear);
+
+date.month = 3
+console.log(`date set in ${date.month}`);
+
+date.month = 0
+console.log(`date set in ${date.month}`);
+
