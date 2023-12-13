@@ -617,8 +617,9 @@ const createProduct1 = (
     tags: string[]
   }
 
+  /** an interface for a find methods and protects tags property */
   interface IFindItemDto extends Readonly<Partial<Omit<Item, 'tags'>>> {
-    readonly tags: ReadonlyArray<string>
+    readonly tags: ReadonlyArray<string> // double readonly not to modify or reasign
   }
 
   const originalItem: Item = {
