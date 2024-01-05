@@ -1,4 +1,7 @@
+import { rejects } from "assert";
 import { publicDecrypt } from "crypto";
+import { resolve } from "dns";
+import { get } from "http";
 import { runInThisContext } from "vm";
 
 class Person {
@@ -187,7 +190,8 @@ class MyDate {
  */
 class Birthday extends MyDate { }
 
-class Animal {
+// class Animal {
+abstract class Animal {
 
     // constructor(public name: string) { }
 
@@ -206,7 +210,7 @@ class Animal {
 
 }
 
-const juan = new Animal('Juan')
+const juan = new Animal('Juan') // ERROR if Animal is an abstract class
 // juan.move()
 // console.log(juan.greeting());
 
@@ -286,11 +290,197 @@ class MyStaticAndReadonlyMath {
     static readonly PI = 3.14
     static max(...numbers: number[]): number {
         return numbers.reduce((max, current) => {
-            return max >= current? max: current
+            return max >= current ? max : current
         })
     }
 }
 // console.log(MyStaticAndReadonlyMath.PI);
 // MyStaticAndReadonlyMath.PI = 2 // ERROR
 // console.log(MyStaticAndReadonlyMath.PI);
-console.log(MyStaticAndReadonlyMath.max(-1, -3, -5));
+// console.log(MyStaticAndReadonlyMath.max(-1, -3, -5));
+
+// this is a CONTRACT
+interface IDriver {
+    database: string
+    password: string
+    port: number
+
+    // and methods
+    connect(): void
+    isconnected(name: string): void
+    disconnect(): void
+}
+
+class PostgresDriver implements IDriver {
+    constructor(
+        public database: string,
+        public password: string,
+        // public port: string // error types not compatible
+        public port: number // error types not compatible
+    ) { }
+
+    connect(): void {
+        // code
+    }
+    isconnected(name: string): void {
+        // code   
+    }
+    disconnect(): void {
+
+    }
+}
+
+class OracleDriver implements IDriver { // ERROR missing properties
+    constructor(
+        public database: string,
+        public password: string,
+        public port: number
+    ) { }
+}
+
+/** 
+ * abstract classes
+ */
+// passed
+
+/**
+ * private constructor - singleton
+ */
+class MyService {
+    // set null first to create once
+    static instance: MyService | null = null
+
+    private constructor(private name: string) { }
+
+    getName() { return this.name }
+
+    // this is for call the class without an instance
+    static create(name: string) {
+        if (MyService.instance === null) {
+            MyService.instance = new MyService(name)
+        }
+        return MyService.instance
+    }
+}
+
+// const myService = new MyService() // ERROR dont use it like new
+const service1 = MyService.create('service 1')
+const service2 = MyService.create('service 2')
+
+// they are the same
+// console.log(service1 === service2); // should return TRUE
+
+// will alsays be first instance name
+// console.log(service1);
+// console.log(service2);
+
+
+/**
+ * not rivate constructor - not singleton
+ */
+class MyUnsingletonService {
+    constructor(private name: string) { }
+
+    getName() { return this.name }
+}
+
+const unsingletonService1 = new MyUnsingletonService('service 1')
+const unsingletonService2 = new MyUnsingletonService('service 2')
+
+// they are the same
+// conksole.log(unsingletonService1 === unsingletonService2); // should return FALSE
+
+// will alsays be first instance name
+// console.log(unsingletonService1);
+// console.log(unsingletonService2);
+
+
+/** 
+ * Promises
+ * asyncronism in Ts
+ * top level await
+*/
+function delay(time: number) {
+
+    // the corresponding type of a promise
+    const promise = new Promise<boolean>((resolve) => {
+        setTimeout(() => {
+            resolve(true)
+            // resolve('string type') // ERROR not promiselike Boolean
+        }, time * 1000)
+    })
+    return promise
+}
+
+// const promise = await delay(5)
+// console.log(promise);
+import axios from 'axios'
+
+
+/* from quicktype.io */
+
+// this should go in product.model.ts file
+export interface Product {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    images: string[];
+    creationAt: Date;
+    updatedAt: Date;
+    category: Category;
+}
+
+// this should go in category.model.ts file
+export interface Category {
+    id: number;
+    name: string;
+    image: string;
+    creationAt: Date;
+    updatedAt: Date;
+}
+
+async function getProducts(): Promise<Product[]> {
+    // const products = await axios.get('https://api.escuelajs.co/api/v1/products?limit=1&offset=0') // return AxiosResponse<any, any>
+    // const { data } = await axios.get('https://api.escuelajs.co/api/v1/products?limit=1&offset=0') // data is type of any (get of what??)
+    const { data } = await axios.get<Product[]>('https://api.escuelajs.co/api/v1/products?limit=1&offset=0')
+
+    // or forced type
+    // const data = products.data as Product[] // this is casting to force
+
+    // convert to async inside to catch directly the axios data (one responsability)
+    return data
+}
+
+const products = await getProducts()
+console.log(products.map((item) => {
+    // item.  // autocomplete with product properties
+    item;
+}));
+
+// in memory dont use async
+
+// in memory use asyn, check app folder
+
+/* function getValue(value: number) {
+    return value
+} */
+/* function getValue(value: number | string) {
+    return value
+} */
+
+//generics
+// function getValue<MyCustomType, MyCustomType2>(value: MyCustomType) {
+function getValue<MyCustomType>(value: MyCustomType) {
+    return value
+}
+
+// type infered
+getValue(12).toFixed()
+getValue('12').toLowerCase()
+getValue([]).length
+
+// type indicated
+getValue<number>(12).toFixed()
+getValue<string>('12').toLowerCase()
+getValue<number[]>([]).length

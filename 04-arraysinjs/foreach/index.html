@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const products = [
+            {
+                title: 'ps5',
+                memory: '500'
+            },
+            {
+                title: 'ps4',
+                memory: '1000'
+            },
+        ]
+
+        const app = document.getElementById('app')
+        // products.forEach(e => document.write(e.title))
+        // products.forEach(e => document.write(e.title))
+        products.forEach((product) => {
+            app.innerHTML += `<li>${product.title} - ${product.memory}</li>`
+        })
+    </script>
+</body>
+
+</html>

@@ -563,13 +563,20 @@ const createProduct1 = (
     return updatedInvestments
   }
 
-  const newInvestment: ICreateInvestmentDto = {
+  const newInvestment1: ICreateInvestmentDto = {
     description: 'click yellow',
     ammount: 2000000,
     categoryId: '9cd19d11-6715-42aa-b40a-4e3364776a2b'
   }
+  const newInvestment2: ICreateInvestmentDto = {
+    description: 'click green',
+    ammount: 3000000,
+    categoryId: '9cd19d11-6715-42aa-b40a-4e3364776a2b'
+  }
 
-  console.log(createIntestment(newInvestment))
+  console.log('\ncreate: ')
+  console.log(createIntestment(newInvestment1))
+  console.log(createIntestment(newInvestment2))
 
   // type IUpdateInvestmentDto = Partial<ICreateInvestmentDto>
   interface IUpdateInvestmentDto extends Partial<ICreateInvestmentDto> { }
@@ -577,7 +584,8 @@ const createProduct1 = (
   const payload: IUpdateInvestmentDto = {
     ammount: 3000000
   }
-  console.log(updateInvestment('28897474-b635-49f3-b49a-13c0f1e2a458', payload))
+  console.log('\nupdate: ')
+  console.log(updateInvestment('28897474-b635-49f3-b49a-13c0f1e2a451', payload))
 
   // in the case of a complex find we just want to read only with all parameters with out modifications
   interface IFindInvestmentDto extends Readonly<Partial<Investment>> {
@@ -595,7 +603,7 @@ const createProduct1 = (
   }
   // const newVariable: IInitialVariable['property'] = 5    // ERROR
   const newVariable: IInitialVariable['property'] = ''
-  console.log(typeof newVariable === 'string');
+  // console.log(typeof newVariable === 'string');
 })();
 
 
